@@ -1,0 +1,1493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+</head>
+<body>
+    
+    <div id="map">
+        <div class="map__checkbox">
+            <!-- АЗС -->
+            <label class="checkbox azs" for="azs">
+                <input id="azs" type="checkbox" checked>
+                <div class="checkbox__box"></div>
+                АЗС
+            </label>
+            <!--END АЗС -->
+            <!-- Автосервисы -->
+            <label class="checkbox avtoservices" for="avtoservices">
+                <input id="avtoservices" type="checkbox" checked>
+                <div class="checkbox__box"></div>
+                Автосервисы
+            </label>
+            <!--END Автосервисы -->
+            <!-- Аптеки -->
+            <label class="checkbox apteki" for="apteki">
+                <input id="apteki" type="checkbox" checked>
+                <div class="checkbox__box"></div>
+                Аптеки
+            </label>
+            <!--END Аптеки -->
+            <!-- Детские сады -->
+            <label class="checkbox detsady" for="detsady">
+                <input id="detsady" type="checkbox" checked>
+                <div class="checkbox__box"></div>
+                Детские сады
+            </label>
+            <!--END Поликлиники и больницы -->
+            <!-- Поликлиники и больницы -->
+            <label class="checkbox bolnicy" for="bolnicy">
+                <input id="bolnicy" type="checkbox" checked>
+                <div class="checkbox__box"></div>
+                Поликлиники и больницы
+            </label>
+            <!--END Поликлиники и больницы -->
+            <!-- Продукты -->
+            <label class="checkbox products" for="products">
+                <input id="products" type="checkbox" checked>
+                <div class="checkbox__box"></div>
+                Продукты
+            </label>
+            <!--END Продукты -->
+            <!-- Развлекательные центры -->
+            <label class="checkbox razvlcenters" for="razvlcenters">
+                <input id="razvlcenters" type="checkbox" checked>
+                <div class="checkbox__box"></div>
+                Развлекательные центры
+            </label>
+            <!--END Развлекательные центры -->
+            <!-- Спортивные комплексы и фитнес -->
+            <label class="checkbox fitnes" for="fitnes">
+                <input id="fitnes" type="checkbox" checked>
+                <div class="checkbox__box"></div>
+                Спортивные комплексы и фитнес
+            </label>
+            <!--END Спортивные комплексы и фитнес -->
+            <!-- Торговые центры -->
+            <label class="checkbox torgcenters" for="torgcenters">
+                <input id="torgcenters" type="checkbox" checked>
+                <div class="checkbox__box"></div>
+                Торговые центры
+            </label>
+            <!--END Торговые центры -->
+            <!-- Школы -->
+            <label class="checkbox scools" for="scools">
+                <input id="scools" type="checkbox" checked>
+                <div class="checkbox__box"></div>
+                Школы
+            </label>
+            <!--END Школы -->
+        </div>
+    </div>
+
+    <style>
+        #map {
+            width: 100%;
+            height: 600px;
+            position: relative;
+        }
+        .map__checkbox {
+            position: absolute;
+            top: 100px;
+            left: 80px;
+            z-index: 3;
+        }
+        @media screen and (max-width: 900px) {
+            .map__checkbox {
+                left: 30px;
+            }
+        }
+        .checkbox {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+            background-color: rgba(255,255,255,0.5);
+            width: max-content;
+            padding-right: 10px;
+            border-radius: 100px;
+        }
+        .checkbox input {
+            display: none;
+        }
+        .checkbox input:checked + .checkbox__box {
+            background-color: rgba(100,100,100);
+        }
+        .checkbox input:checked + .checkbox__box:before{
+            transform: translateX(34px);
+        }
+        /* AZS */
+        .azs input:checked + .checkbox__box:before {
+            background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMiIgaGVpZ2h0PSIyMiI+PHBhdGggZmlsbD0iIzgwODI4NSIgZD0iTTE0LjUgMTcuMzdsLS4wMy01LjhoLjU4djMuMmMtLjAyLjQzLjQuOTIuODcuODZoMS4xNmMuNCAwIC44Ny0uMjkuODctLjg3di01LjVoLjU4VjYuOTVoLS44TDE2LjIgNS4ybC0uODcuNTguODcgMS43NHYxLjE1aC41OHY1LjhoLS41OFYxMWMwLS40NS0uMy0xLjE2LTEuMTYtMS4xNmgtLjU4di01LjVjLjA0LS41LS40Mi0uODctLjg2LS44N0g2LjA4YS44Ny44NyAwIDAgMC0uODcuODd2MTMuMDNINC4wNXYxLjc0aDExLjU4di0xLjc0aC0xLjEyek02Ljk2IDUuMmg1Ljc5djQuMDVoLTUuOFY1LjIxeiIvPjwvc3ZnPg==);
+        }
+        .azs input:checked + .checkbox__box{
+            background-color: #B3B3B3;
+        }
+        /*END AZS */
+
+        /* Автосервисы */
+        .avtoservices input:checked + .checkbox__box:before {
+            background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMiIgaGVpZ2h0PSIyMiI+PHBhdGggZmlsbD0iIzgwODI4NSIgZD0iTTMuMTQgMTguMDZhLjc4Ljc4IDAgMCAxIDAtMS4xM2w3LjUzLTcuNS0uMzMtLjQ5YTIuOTIgMi45MiAwIDAgMSAuMzMtMy43bDEuNjItMS42MmEyLjM1IDIuMzUgMCAwIDEgMy40IDBsLjE2LjE2LTMuNCAzLjM5IDIuNDMgMi40MiAzLjQtMy4zOS4xNi4xNmEyLjUgMi41IDAgMCAxIDAgMy40bC0xLjYyIDEuNmEzLjA2IDMuMDYgMCAwIDEtMy43My4zM2wtLjQ4LS4zMi03LjUzIDcuNWEuNzkuNzkgMCAwIDEtMS4xMyAwbC0uODEtLjgxeiIvPjwvc3ZnPg==);
+        }
+        .avtoservices input:checked + .checkbox__box{
+            background-color: #1E98FF;
+        }
+        /*END Автосервисы */
+
+        /* Автосервисы */
+        .apteki input:checked + .checkbox__box:before {
+            background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMiIgaGVpZ2h0PSIyMiI+PHBhdGggZmlsbD0iIzgwODI4NSIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNOS4yNiA1LjIxaDMuNDh2NC4wNWg0LjA1djMuNDhoLTQuMDV2NC4wNUg5LjI2di00LjA1SDUuMjFWOS4yNmg0LjA1VjUuMjF6TTExIDE5LjExYTguMTEgOC4xMSAwIDEgMCAwLTE2LjIyIDguMTEgOC4xMSAwIDAgMCAwIDE2LjIyem0wIDEuMTVhOS4yNiA5LjI2IDAgMSAwIDAtMTguNTIgOS4yNiA5LjI2IDAgMCAwIDAgMTguNTJ6Ii8+PC9zdmc+);
+        }
+        .apteki input:checked + .checkbox__box{
+            background-color: #1BAD03;
+        }
+        /*END Автосервисы */
+
+        /* детские сады */
+        .detsady input:checked + .checkbox__box:before {
+            background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMiIgaGVpZ2h0PSIyMiI+PHBhdGggZmlsbD0iIzgwODI4NSIgZD0iTTcuNTMgNS43OWExLjc0IDEuNzQgMCAxIDAgMC0zLjQ4IDEuNzQgMS43NCAwIDAgMCAwIDMuNDh6bTIuMzEuNThINS4yMmwtLjMuMjUtMi42IDQuOTYgMS4xNS41OCAxLjc1LTMuNDh2MTAuNDNoMS43M1YxMy45SDguMXY1LjJoMS43M1Y4LjdsMi4zMiA0LjM0IDIuMzEtLjU4djYuNjZoMS4xNnYtNC4wNmguNTh2NC4wNmgxLjE2di02LjM3bDIuMzEgMS40NC41OC0uODZMMTcuMzcgMTFoLTIuOWwtMS43My42My0yLjYtNS0uMy0uMjZ6bTYuMDggNC4wNWExLjE2IDEuMTYgMCAxIDAgMC0yLjMxIDEuMTYgMS4xNiAwIDAgMCAwIDIuMzF6Ii8+PC9zdmc+);
+        }
+        .detsady input:checked + .checkbox__box{
+            background-color: #97A100;
+        }
+        /*END детские сады */
+
+        /* Больницы */
+        .bolnicy input:checked + .checkbox__box:before {
+            background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMiIgaGVpZ2h0PSIyMiI+PHBhdGggZmlsbD0iIzgwODI4NSIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNOS4yNiA1LjIxaDMuNDh2NC4wNWg0LjA1djMuNDhoLTQuMDV2NC4wNUg5LjI2di00LjA1SDUuMjFWOS4yNmg0LjA1VjUuMjF6TTExIDE5LjExYTguMTEgOC4xMSAwIDEgMCAwLTE2LjIyIDguMTEgOC4xMSAwIDAgMCAwIDE2LjIyem0wIDEuMTVhOS4yNiA5LjI2IDAgMSAwIDAtMTguNTIgOS4yNiA5LjI2IDAgMCAwIDAgMTguNTJ6Ii8+PC9zdmc+);
+        }
+        .bolnicy input:checked + .checkbox__box{
+            background-color: #ED4543;
+        }
+        /*END Больницы */
+
+        /* Продукты */
+        .products input:checked + .checkbox__box:before {
+            background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMiIgaGVpZ2h0PSIyMiI+PHBhdGggZmlsbD0iIzgwODI4NSIgZD0iTTIuOSAzLjQ3aDMuNzZMOC4xIDYuOTVoMTAuNDJWMTFsLTkuODQgMi4zMkw1LjIgNS4ySDIuOVYzLjQ3em00LjA1IDE0LjQ4YTEuNzQgMS43NCAwIDEgMCAwLTMuNDggMS43NCAxLjc0IDAgMCAwIDAgMy40OHptNy41MiAwYTEuNzQgMS43NCAwIDEgMCAwLTMuNDggMS43NCAxLjc0IDAgMSAwIDAgMy40OHoiLz48L3N2Zz4=);
+        }
+        .products input:checked + .checkbox__box{
+            background-color: #FF931E;
+        }
+        /*END Продукты */
+
+        /* Развлекательные центры */
+        .razvlcenters input:checked + .checkbox__box:before {
+            background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMiIgaGVpZ2h0PSIyMiI+PHBhdGggZmlsbD0iIzgwODI4NSIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNMTEuNTggMTEuNThsLS44OC0xLjc0LTIuNi0uNTguNTcgMi4zMmgyLjl6bTEuNzQgMGgyLjZsLjg3LTIuMzItMi42LjU4LS44NyAxLjc0ek0xNS42MyAxNXMtMS41OS42My0zLjE4LjYzYy0xLjY5IDAtMy4xOS0uNjMtMy4xOS0uNjNzLjg5IDIuMyAzLjE5IDIuMzdjMi4yMS0uMDcgMy4xOC0yLjM3IDMuMTgtMi4zN3ptLTguNjEtLjYyYy44OCAzLjggMy4xMyA1LjMgNS40MyA1LjNzNC4zLTEuNSA1LjItNS4zYy44OC0zLjc4Ljg4LTkuMTcuODgtOS4xN3MtMy40OCAxLjQ1LTYuMDggMS40NS02LjA4LS44Ny02LjA4LS44Ny0uMjQgNC44LjY1IDguNnpNMy40NyAyLjlzMy43Mi44NyA2LjM3Ljg3YzIuNjYgMCA2LjM3LS44NyA2LjM3LS44N3YxLjc0Yy0xLjI0LjM1LTMuNDkuNTgtNS43OS41OHMtNS41LS44Ny01LjUtLjg3LS4wMyA1LjEuODYgOC45YTkuNTEgOS41MSAwIDAgMCAxLjE3IDIuOTdjLTEuMDctLjc4LTIuMDgtMi4xMy0yLjYtNC4zNC0uOTEtMy44MS0uODktOC45OS0uODktOC45OXoiLz48L3N2Zz4=);
+        }
+        .razvlcenters input:checked + .checkbox__box{
+            background-color: #DDD21E;
+        }
+        /*END Развлекательные центры */
+
+        /* Спортивные комплексы и фитнес */
+        .fitnes input:checked + .checkbox__box:before {
+            background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMiIgaGVpZ2h0PSIyMiI+PHBhdGggZmlsbD0iIzgwODI4NSIgZD0iTTYuOTUgOS44NGg4LjF2MS43NGgtOC4xVjkuODR6TTQuMDUgNS44aDIuMzJ2OS44NEg0LjA1VjUuOHptMTEuNTggMGgyLjMydjkuODRoLTIuMzJWNS44em0yLjkgMi4zMWgxLjczdjUuMjJoLTEuNzNWOC4xem0tMTYuOCAwaDEuNzV2NS4yMkgxLjc0VjguMXoiLz48L3N2Zz4=);
+        }
+        .fitnes input:checked + .checkbox__box{
+            background-color: #177BC9;
+        }
+        /*END Спортивные комплексы и фитнес */
+
+        /* Торговые центры */
+        .torgcenters input:checked + .checkbox__box:before {
+            background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMiIgaGVpZ2h0PSIyMiI+PHBhdGggZmlsbD0iIzgwODI4NSIgZD0iTTIuOSAzLjQ3aDMuNzZMOC4xIDYuOTVoMTAuNDJWMTFsLTkuODQgMi4zMkw1LjIgNS4ySDIuOVYzLjQ3em00LjA1IDE0LjQ4YTEuNzQgMS43NCAwIDEgMCAwLTMuNDggMS43NCAxLjc0IDAgMCAwIDAgMy40OHptNy41MiAwYTEuNzQgMS43NCAwIDEgMCAwLTMuNDggMS43NCAxLjc0IDAgMSAwIDAgMy40OHoiLz48L3N2Zz4=);
+        }
+        .torgcenters input:checked + .checkbox__box{
+            background-color: #E6761B;
+        }
+        /*END Торговые центры */
+
+        /* Школы */
+        .scools input:checked + .checkbox__box:before {
+            background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMiIgaGVpZ2h0PSIyMiI+PHBhdGggZmlsbD0iIzgwODI4NSIgZD0iTTcuNTMgNS43OWExLjc0IDEuNzQgMCAxIDAgMC0zLjQ4IDEuNzQgMS43NCAwIDAgMCAwIDMuNDh6bTIuMzEuNThINS4yMmwtLjMuMjUtMi42IDQuOTYgMS4xNS41OCAxLjc1LTMuNDh2MTAuNDNoMS43M1YxMy45SDguMXY1LjJoMS43M1Y4LjdsMi4zMiA0LjM0IDIuMzEtLjU4djYuNjZoMS4xNnYtNC4wNmguNTh2NC4wNmgxLjE2di02LjM3bDIuMzEgMS40NC41OC0uODZMMTcuMzcgMTFoLTIuOWwtMS43My42My0yLjYtNS0uMy0uMjZ6bTYuMDggNC4wNWExLjE2IDEuMTYgMCAxIDAgMC0yLjMxIDEuMTYgMS4xNiAwIDAgMCAwIDIuMzF6Ii8+PC9zdmc+);
+        }
+        .scools input:checked + .checkbox__box{
+            background-color: #793D0E;
+        }
+        /*END Школы */
+        
+        .checkbox__box {
+            width: 64px;
+            height: 30px;
+            background-color: rgba(100,100,100,.2);
+            border-radius: 100px;
+            margin-right: 10px;
+            padding: 2px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            transition: 0.1s;
+        }
+        .checkbox__box:before {
+            content: '';
+            display: block;
+            width: 30px;
+            height: 30px;
+            background-color: #fff;
+            border-radius: 50%;
+            transition: 0.1s;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 70%;
+        }
+    </style>
+
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=<b3b5d811-9ed0-4caa-a770-c9d9d2320009>&lang=ru_RU"></script>
+    <script>
+        //==============Карта с фильтром=================
+        //Логика фильтра закалючается в том, что сначала удаляем все маркеры с карты методом geoObjects.remove, а затем добавляем нужные geoObjects.add
+        ymaps.ready(init);
+        var myMapAll;
+        function init() {
+            myMapAll = new ymaps.Map("map", {
+                    center: [56.060066,37.178768],
+                    zoom: 10
+                });
+
+                
+
+                //===================АЗС=========================================
+                var myPlacemark_azs_1 = new ymaps.Placemark([56.040011355708,37.162759914397], {
+                        hintContent: 'Роснефть',
+                        balloonContentHeader: 'Роснефть',
+                        balloonContentBody: '<p></p>'
+                    }, {
+                        preset: 'islands#grayFuelStationIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+                 myMapAll.geoObjects.add(myPlacemark_azs_1);
+
+
+                 
+
+                    jQuery('.azs input').on('change', function(){
+                        if(jQuery(this).prop('checked')){
+                            myMapAll.geoObjects.add(myPlacemark_azs_1);
+                            myMapAll.geoObjects.add(myPlacemark_azs_2);
+                        }else {
+                            myMapAll.geoObjects.remove(myPlacemark_azs_1);
+                            myMapAll.geoObjects.remove(myPlacemark_azs_2);
+                        }
+                    });
+                    
+                //=================END АЗС==============================================
+
+                //===================Автосервисы=========================================
+                var myPlacemark_avtoservices_1 = new ymaps.Placemark([56.054146,37.152642], {
+                        hintContent: 'Bars-Auto Ленинградское шоссе',
+                        balloonContentHeader: 'Bars-Auto Ленинградское шоссе',
+                        balloonContentBody: '<p>Bars-Auto Ленинградское шоссе, Россия, Московская область 2,4 км (5 мин)</p>'
+                    }, {
+                        preset: 'islands#blueRepairShopIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+                myMapAll.geoObjects.add(myPlacemark_avtoservices_1);
+                
+                var myPlacemark_avtoservices_2 = new ymaps.Placemark([55.997109,37.252758], {
+                        hintContent: 'Land Rover Зеленоград',
+                        balloonContentHeader: 'Land Rover Зеленоград',
+                        balloonContentBody: '<p>Land Rover Зеленоград поселок городского типа Ржавки, к14, Россия, Московская область, Солнечногорский район 16 км (21 мин)</p>'
+                    }, {
+                        preset: 'islands#blueRepairShopIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+                myMapAll.geoObjects.add(myPlacemark_avtoservices_2);
+
+                myPlacemark_avtoservices_3 = new ymaps.Placemark([55.998113,37.250262], {
+                        hintContent: 'Аванта Зеленоград KIA',
+                        balloonContentHeader: 'Аванта Зеленоград KIA',
+                        balloonContentBody: '<p>Аванта Зеленоград KIA Ленинградское шоссе, 37-й километр, Россия, Москва, Зеленоград, Ленинградское шоссе 14 км (17 мин)</p>'
+                    }, {
+                        preset: 'islands#blueRepairShopIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+                myMapAll.geoObjects.add(myPlacemark_avtoservices_3);
+                
+                var myPlacemark_avtoservices_4= new ymaps.Placemark([56.060335,37.144853], {
+                        hintContent: 'Кордайл Ленинградское шоссе',
+                        balloonContentHeader: 'Кордайл Ленинградское шоссе',
+                        balloonContentBody: '<p>Кордайл Ленинградское шоссе, Россия, Московская область 3,3 км (7 мин)</p>'
+                    }, {
+                        preset: 'islands#blueRepairShopIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+                myMapAll.geoObjects.add(myPlacemark_avtoservices_4);
+
+                var myPlacemark_avtoservices_5 = new ymaps.Placemark([56.054452,37.152272], {
+                        hintContent: 'МегаСварщик',
+                        balloonContentHeader: 'МегаСварщик',
+                        balloonContentBody: '<p>МегаСварщик деревня Дурыкино, 76, Россия, Московская область, Солнечногорский район 2,4 км (5 мин)</p>'
+                    }, {
+                        preset: 'islands#blueRepairShopIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+                myMapAll.geoObjects.add(myPlacemark_avtoservices_5);
+
+                var myPlacemark_avtoservices_6 = new ymaps.Placemark([56.01385,37.20512], {
+                        hintContent: 'Техцентр Кайрос Моторс',
+                        balloonContentHeader: 'Техцентр Кайрос Моторс',
+                        balloonContentBody: '<p>Техцентр Кайрос Моторс Панфиловский проспект, 2А, Россия, Москва, Зеленоград 10 км (14 мин)</p>'
+                    }, {
+                        preset: 'islands#blueRepairShopIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+                myMapAll.geoObjects.add(myPlacemark_avtoservices_6);
+
+
+                jQuery('.avtoservices input').on('change', function(){
+                        if(jQuery(this).prop('checked')){
+                            myMapAll.geoObjects.add(myPlacemark_avtoservices_1);
+                            myMapAll.geoObjects.add(myPlacemark_avtoservices_2);
+                            myMapAll.geoObjects.add(myPlacemark_avtoservices_3);
+                            myMapAll.geoObjects.add(myPlacemark_avtoservices_4);
+                            myMapAll.geoObjects.add(myPlacemark_avtoservices_5);
+                            myMapAll.geoObjects.add(myPlacemark_avtoservices_6);
+                        }else {
+                            myMapAll.geoObjects.remove(myPlacemark_avtoservices_1);
+                            myMapAll.geoObjects.remove(myPlacemark_avtoservices_2);
+                            myMapAll.geoObjects.remove(myPlacemark_avtoservices_3);
+                            myMapAll.geoObjects.remove(myPlacemark_avtoservices_4);
+                            myMapAll.geoObjects.remove(myPlacemark_avtoservices_5);
+                            myMapAll.geoObjects.remove(myPlacemark_avtoservices_6);
+                        }
+                    });
+                //=================END Автосервисы========================================
+
+                //===================Аптеки=========================================
+                var myPlacemark_apteki_1 = new ymaps.Placemark([55.995646,37.211685], {
+                        hintContent: 'Аптека',
+                        balloonContentHeader: 'Аптека',
+                        balloonContentBody: '<p>Москва, Зеленоград, Центральный пр-т¸корп. 436, 13 км (20 мин)</p>'
+                    }, {
+                        preset: 'islands#darkGreenMedicalIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+                myMapAll.geoObjects.add(myPlacemark_apteki_1);
+                
+                var myPlacemark_apteki_2 = new ymaps.Placemark([56.075868,37.126797], {
+                        hintContent: 'Аптека д. Радумля',
+                        balloonContentHeader: 'Аптека д. Радумля',
+                        balloonContentBody: '<p>Аптека Московская обл., д. Радумля, 10 км. (12-15 мин)</p>'
+                    }, {
+                        preset: 'islands#darkGreenMedicalIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+                myMapAll.geoObjects.add(myPlacemark_apteki_2);
+
+                var myPlacemark_apteki_3 = new ymaps.Placemark([56.00094,37.211767], {
+                        hintContent: 'Аптеки столицы',
+                        balloonContentHeader: 'Аптеки столицы',
+                        balloonContentBody: '<p>Аптеки столицы. Москва, Зеленоград, корп. 309, 12 км (15-20 мин)</p>'
+                    }, {
+                        preset: 'islands#darkGreenMedicalIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+                myMapAll.geoObjects.add(myPlacemark_apteki_3);
+
+                var myPlacemark_apteki_4 = new ymaps.Placemark([56.002883,37.205865], {
+                        hintContent: 'Аптеки столицы',
+                        balloonContentHeader: 'Аптеки столицы',
+                        balloonContentBody: '<p>Аптеки столицы Центральный проспект, 234А, Россия, Москва, Зеленоград  12 км (18 мин)</p>'
+                    }, {
+                        preset: 'islands#darkGreenMedicalIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+                myMapAll.geoObjects.add(myPlacemark_apteki_4);
+
+                var myPlacemark_apteki_5 = new ymaps.Placemark([55.998061,37.236139], {
+                        hintContent: 'ГорЗдрав',
+                        balloonContentHeader: 'ГорЗдрав',
+                        balloonContentBody: '<p>ГорЗдрав Зеленоград, к514с2, Россия, Москва 13 км (18 мин)</p>'
+                    }, {
+                        preset: 'islands#darkGreenMedicalIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+                myMapAll.geoObjects.add(myPlacemark_apteki_5);
+
+                var myPlacemark_apteki_6 = new ymaps.Placemark([56.012179,37.202075], {
+                        hintContent: 'ЗелМедЦентр',
+                        balloonContentHeader: 'ЗелМедЦентр',
+                        balloonContentBody: '<p>ЗелМедЦентр Панфиловский проспект, 10, Россия, Москва, Зеленоград 10 км (16 мин)</p>'
+                    }, {
+                        preset: 'islands#darkGreenMedicalIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+                myMapAll.geoObjects.add(myPlacemark_apteki_6);
+
+
+                jQuery('.apteki input').on('change', function(){
+                        if(jQuery(this).prop('checked')){
+                            myMapAll.geoObjects.add(myPlacemark_apteki_1);
+                            myMapAll.geoObjects.add(myPlacemark_apteki_2);
+                            myMapAll.geoObjects.add(myPlacemark_apteki_3);
+                            myMapAll.geoObjects.add(myPlacemark_apteki_4);
+                            myMapAll.geoObjects.add(myPlacemark_apteki_5);
+                            myMapAll.geoObjects.add(myPlacemark_apteki_6);
+                        }else {
+                            myMapAll.geoObjects.remove(myPlacemark_apteki_1);
+                            myMapAll.geoObjects.remove(myPlacemark_apteki_2);
+                            myMapAll.geoObjects.remove(myPlacemark_apteki_3);
+                            myMapAll.geoObjects.remove(myPlacemark_apteki_4);
+                            myMapAll.geoObjects.remove(myPlacemark_apteki_5);
+                            myMapAll.geoObjects.remove(myPlacemark_apteki_6);
+                        }
+                    });
+                //=================END Аптеки========================================
+                //===================Детские сады=========================================
+                var myPlacemark_detsady_1 = new ymaps.Placemark([55.993651,37.195885], {
+                        hintContent: 'ГБОУ СОШ № 718 Дошкольное отделение',
+                        balloonContentHeader: 'ГБОУ СОШ № 718 Дошкольное отделение',
+                        balloonContentBody: '<p>ГБОУ СОШ № 718 Дошкольное отделение Зеленоград, к1218, Россия, Москва 15 км (24 мин)</p>'
+                    }, {
+                        preset: 'islands#oliveFamilyIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+                myMapAll.geoObjects.add(myPlacemark_detsady_1);
+                
+                var myPlacemark_detsady_2 = new ymaps.Placemark([56.035326,37.23304], {
+                        hintContent: 'Детский сад № 37 ',
+                        balloonContentHeader: 'Детский сад № 37 ',
+                        balloonContentBody: '<p>Детский сад № 37 Институтская улица, 6, Россия, Московская область, Солнечногорский район, поселок городского типа Менделеево 14 км (21 мин)</p>'
+                    }, {
+                        preset: 'islands#oliveFamilyIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+                myMapAll.geoObjects.add(myPlacemark_detsady_2);
+
+                var myPlacemark_detsady_3 = new ymaps.Placemark([56.133947,37.070388], {
+                        hintContent: 'Детский сад № 48',
+                        balloonContentHeader: 'Детский сад № 48',
+                        balloonContentBody: '<p>Детский сад № 48 деревня Пешки, Россия, Московская область, Солнечногорский район 13 км (17 мин)</p>'
+                    }, {
+                        preset: 'islands#oliveFamilyIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+                myMapAll.geoObjects.add(myPlacemark_detsady_3);
+
+                var myPlacemark_detsady_4 = new ymaps.Placemark([56.074692,37.124405], {
+                        hintContent: 'Детский сад Комбинированного Вида № 44',
+                        balloonContentHeader: 'Детский сад Комбинированного Вида № 44',
+                        balloonContentBody: '<p>Детский сад Комбинированного Вида № 44 деревня Радумля, Россия, Московская область, Солнечногорский район 4,6 км (9 мин)</p>'
+                    }, {
+                        preset: 'islands#oliveFamilyIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+                myMapAll.geoObjects.add(myPlacemark_detsady_4);
+                
+                var myPlacemark_detsady_5 = new ymaps.Placemark([56.016693,37.219412], {
+                        hintContent: 'Детский сад, МБДОУ № 30',
+                        balloonContentHeader: 'Детский сад, МБДОУ № 30',
+                        balloonContentBody: '<p>Детский сад, МБДОУ № 30 поселок городского типа Ржавки, 5, Россия, Московская область, Солнечногорский район 12 км (17 мин)</p>'
+                    }, {
+                        preset: 'islands#oliveFamilyIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+                myMapAll.geoObjects.add(myPlacemark_detsady_5);
+
+                var myPlacemark_detsady_6 = new ymaps.Placemark([56.064326,37.064942], {
+                        hintContent: 'МДОУ  Детский сад № 27 Елочка',
+                        balloonContentHeader: 'МДОУ  Детский сад № 27 Елочка',
+                        balloonContentBody: '<p>МДОУ  Детский сад № 27 Елочка посёлок городского типа Поварово, Россия, Московская область, Солнечногорский район 14 км (22 мин)</p>'
+                    }, {
+                        preset: 'islands#oliveFamilyIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+                myMapAll.geoObjects.add(myPlacemark_detsady_6);
+
+                var myPlacemark_detsady_7 = new ymaps.Placemark([56.09241,37.149619], {
+                        hintContent: 'МДОУ  Школа-сад № 46',
+                        balloonContentHeader: 'МДОУ  Школа-сад № 46',
+                        balloonContentBody: '<p>МДОУ  Школа-сад № 46 Центральный проезд, Россия, Московская область, Солнечногорский район, посёлок Майдарово 7,8 км. (14 мин)</p>'
+                    }, {
+                        preset: 'islands#oliveFamilyIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+                myMapAll.geoObjects.add(myPlacemark_detsady_7);
+
+                var myPlacemark_detsady_8 = new ymaps.Placemark([56.074437,37.125139], {
+                        hintContent: 'МДОУ Детский сад – ясли  № 44',
+                        balloonContentHeader: 'МДОУ Детский сад – ясли  № 44',
+                        balloonContentBody: '<p>МДОУ Детский сад – ясли  № 44 деревня Радумля, Россия, Московская область, Солнечногорский район 11 км (17 мин)</p>'
+                    }, {
+                        preset: 'islands#oliveFamilyIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+                myMapAll.geoObjects.add(myPlacemark_detsady_8);
+
+                var myPlacemark_detsady_9 = new ymaps.Placemark([56.088578,37.107726], {
+                        hintContent: 'МДОУ Детский сад № 24 ',
+                        balloonContentHeader: 'МДОУ Детский сад № 24 ',
+                        balloonContentBody: '<p>МДОУ Детский сад № 24 деревня Ложки, Россия, Московская область, Солнечногорский район 8,5 км. (15 мин)</p>'
+                    }, {
+                        preset: 'islands#oliveFamilyIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+                myMapAll.geoObjects.add(myPlacemark_detsady_9);
+
+                var myPlacemark_detsady_10 = new ymaps.Placemark([56.008168,37.204563], {
+                        hintContent: 'Филиал школы № 842',
+                        balloonContentHeader: 'Филиал школы № 842',
+                        balloonContentBody: '<p>Филиал школы № 842 Дошкольное отделение Зеленоград, к115, Россия, Москва 12 км (19 мин)</p>'
+                    }, {
+                        preset: 'islands#oliveFamilyIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+                myMapAll.geoObjects.add(myPlacemark_detsady_10);
+
+                var myPlacemark_detsady_11 = new ymaps.Placemark([56.007967,37.208138], {
+                        hintContent: 'Частный детский сад Домовенок',
+                        balloonContentHeader: 'Частный детский сад Домовенок',
+                        balloonContentBody: '<p>Частный детский сад Домовенок Зеленоград, к106, Россия, Москва 12 км (18 мин)</p>'
+                    }, {
+                        preset: 'islands#oliveFamilyIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+                myMapAll.geoObjects.add(myPlacemark_detsady_11);
+
+                jQuery('.detsady input').on('change', function(){
+                        if(jQuery(this).prop('checked')){
+                            myMapAll.geoObjects.add(myPlacemark_detsady_1);
+                            myMapAll.geoObjects.add(myPlacemark_detsady_2);
+                            myMapAll.geoObjects.add(myPlacemark_detsady_3);
+                            myMapAll.geoObjects.add(myPlacemark_detsady_4);
+                            myMapAll.geoObjects.add(myPlacemark_detsady_5);
+                            myMapAll.geoObjects.add(myPlacemark_detsady_6);
+                            myMapAll.geoObjects.add(myPlacemark_detsady_7);
+                            myMapAll.geoObjects.add(myPlacemark_detsady_8);
+                            myMapAll.geoObjects.add(myPlacemark_detsady_9);
+                            myMapAll.geoObjects.add(myPlacemark_detsady_10);
+                            myMapAll.geoObjects.add(myPlacemark_detsady_11);
+                        }else {
+                            myMapAll.geoObjects.remove(myPlacemark_detsady_1);
+                            myMapAll.geoObjects.remove(myPlacemark_detsady_2);
+                            myMapAll.geoObjects.remove(myPlacemark_detsady_3);
+                            myMapAll.geoObjects.remove(myPlacemark_detsady_4);
+                            myMapAll.geoObjects.remove(myPlacemark_detsady_5);
+                            myMapAll.geoObjects.remove(myPlacemark_detsady_6);
+                            myMapAll.geoObjects.remove(myPlacemark_detsady_7);
+                            myMapAll.geoObjects.remove(myPlacemark_detsady_8);
+                            myMapAll.geoObjects.remove(myPlacemark_detsady_9);
+                            myMapAll.geoObjects.remove(myPlacemark_detsady_10);
+                            myMapAll.geoObjects.remove(myPlacemark_detsady_11);
+                        }
+                    });
+                //=================END Детские сады========================================
+                //===================Поликлиники и больницы=========================================
+                var myPlacemark_bolnicy_1 = new ymaps.Placemark([56.001806,37.204868], {
+                        hintContent: 'Детская поликлиника № 105 филиал № 3',
+                        balloonContentHeader: 'Детская поликлиника № 105 филиал № 3',
+                        balloonContentBody: '<p>Детская поликлиника № 105 филиал № 3 Зеленоград, к225А, Россия, Москва 12 км (17 мин)</p>'
+                    }, {
+                        preset: 'islands#redMedicalIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+                myMapAll.geoObjects.add(myPlacemark_bolnicy_1);
+                
+                var myPlacemark_bolnicy_2 = new ymaps.Placemark([56.075976,37.120975], {
+                        hintContent: 'Дурыкинская амбулатория',
+                        balloonContentHeader: 'Дурыкинская амбулатория',
+                        balloonContentBody: '<p>Дурыкинская амбулатория  Больница, поликлиника деревня Радумля, 14, Россия, Московская область, Солнечногорский район 10 км (17 мин)</p>'
+                    }, {
+                        preset: 'islands#redMedicalIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+                myMapAll.geoObjects.add(myPlacemark_bolnicy_2);
+
+                var myPlacemark_bolnicy_3 = new ymaps.Placemark([56.006351,37.204563], {
+                        hintContent: 'Зеленоградский центр Кинезитерапии ',
+                        balloonContentHeader: 'Зеленоградский центр Кинезитерапии ',
+                        balloonContentBody: '<p>Зеленоградский центр Кинезитерапии Зеленоград, к118, Россия, Москва 12 км (17 мин) </p>'
+                    }, {
+                        preset: 'islands#redMedicalIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+                myMapAll.geoObjects.add(myPlacemark_bolnicy_3);
+
+                var myPlacemark_bolnicy_4 = new ymaps.Placemark([56.034606,37.231261], {
+                        hintContent: 'Менделеевская детская поликлиника',
+                        balloonContentHeader: 'Менделеевская детская поликлиника',
+                        balloonContentBody: '<p>Менделеевская детская поликлиника Институтская улица, 8, Россия, Московская область, Солнечногорский район, поселок городского типа Менделеево 15 км (22 мин)</p>'
+                    }, {
+                        preset: 'islands#redMedicalIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+                myMapAll.geoObjects.add(myPlacemark_bolnicy_4);
+
+                var myPlacemark_bolnicy_5 = new ymaps.Placemark([56.010312,37.195939], {
+                        hintContent: 'Отделение платных услуг Поликлиники № 201',
+                        balloonContentHeader: 'Отделение платных услуг Поликлиники № 201',
+                        balloonContentBody: '<p>Отделение платных услуг Поликлиники № 201 1-й Западный проезд, 8с1, Россия, Москва, Зеленоград 11 км (15 мин)</p>'
+                    }, {
+                        preset: 'islands#redMedicalIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+                myMapAll.geoObjects.add(myPlacemark_bolnicy_5);
+
+                var myPlacemark_bolnicy_6 = new ymaps.Placemark([56.065163,37.072286], {
+                        hintContent: 'Отделение скорой помощи ГП Поварово ',
+                        balloonContentHeader: 'Отделение скорой помощи ГП Поварово ',
+                        balloonContentBody: '<p>Отделение скорой помощи ГП Поварово микрорайон Поваровка, 11, Россия, Московская область, Солнечногорский район, посёлок городского типа Поварово 14 км (21 мин)</p>'
+                    }, {
+                        preset: 'islands#redMedicalIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+                myMapAll.geoObjects.add(myPlacemark_bolnicy_6);
+
+                var myPlacemark_bolnicy_7 = new ymaps.Placemark([55.990569,37.147493], {
+                        hintContent: 'Роддом №3',
+                        balloonContentHeader: 'Роддом №3',
+                        balloonContentBody: '<p>Роддом № 3 улица Александровка, 8с2, Россия, Москва, Зеленоград, 14-й микрорайон 17 км (27 мин)</p>'
+                    }, {
+                        preset: 'islands#redMedicalIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+                myMapAll.geoObjects.add(myPlacemark_bolnicy_7);
+
+                var myPlacemark_bolnicy_8 = new ymaps.Placemark([55.98426,37.238744], {
+                        hintContent: 'Стоматологическая поликлиника № 31',
+                        balloonContentHeader: 'Стоматологическая поликлиника № 31',
+                        balloonContentBody: '<p>Стоматологическая поликлиника № 31 Каштановая аллея, 2с8, Россия, Москва, Зеленоград 16 км (21 мин)</p>'
+                    }, {
+                        preset: 'islands#redMedicalIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+                myMapAll.geoObjects.add(myPlacemark_bolnicy_8);
+
+
+                jQuery('.bolnicy input').on('change', function(){
+                        if(jQuery(this).prop('checked')){
+                            myMapAll.geoObjects.add(myPlacemark_bolnicy_1);
+                            myMapAll.geoObjects.add(myPlacemark_bolnicy_2);
+                            myMapAll.geoObjects.add(myPlacemark_bolnicy_3);
+                            myMapAll.geoObjects.add(myPlacemark_bolnicy_4);
+                            myMapAll.geoObjects.add(myPlacemark_bolnicy_5);
+                            myMapAll.geoObjects.add(myPlacemark_bolnicy_6);
+                            myMapAll.geoObjects.add(myPlacemark_bolnicy_7);
+                            myMapAll.geoObjects.add(myPlacemark_bolnicy_8);
+                        }else {
+                            myMapAll.geoObjects.remove(myPlacemark_bolnicy_1);
+                            myMapAll.geoObjects.remove(myPlacemark_bolnicy_2);
+                            myMapAll.geoObjects.remove(myPlacemark_bolnicy_3);
+                            myMapAll.geoObjects.remove(myPlacemark_bolnicy_4);
+                            myMapAll.geoObjects.remove(myPlacemark_bolnicy_5);
+                            myMapAll.geoObjects.remove(myPlacemark_bolnicy_6);
+                            myMapAll.geoObjects.remove(myPlacemark_bolnicy_7);
+                            myMapAll.geoObjects.remove(myPlacemark_bolnicy_8);
+                        }
+                    });
+                //=================END Поликлиники и больницы========================================
+                //===================Продукты=========================================
+                var myPlacemark_products_1 = new ymaps.Placemark([56.049282860748,37.155433779975], {
+                        hintContent: '«Сельмаг» торговый центр, супермаркет.',
+                        balloonContentHeader: '«Сельмаг» торговый центр, супермаркет.',
+                        balloonContentBody: '<p>Сельмаг торговый центр, супермаркет Ленинградское шоссе, Россия, Московская область 2,4 км (5 мин)</p>'
+                    }, {
+                        preset: 'islands#orangeShoppingIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+
+                var myPlacemark_products_2 = new ymaps.Placemark([55.997728,37.235734], {
+                        hintContent: 'Азбука Вкуса Зеленоград',
+                        balloonContentHeader: 'Азбука Вкуса Зеленоград',
+                        balloonContentBody: '<p>Азбука Вкуса Зеленоград, к514, Россия, Москва 13 км (16 мин)</p>'
+                    }, {
+                        preset: 'islands#orangeShoppingIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+
+                var myPlacemark_products_3 = new ymaps.Placemark([56.074582,37.124686], {
+                        hintContent: 'Дмитрогорский продукт д Радумля',
+                        balloonContentHeader: 'Дмитрогорский продукт д Радумля',
+                        balloonContentBody: '<p>Дмитрогорский продукт д Радумля</p>'
+                    }, {
+                        preset: 'islands#orangeShoppingIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+
+                var myPlacemark_products_4 = new ymaps.Placemark([56.009668,37.209342], {
+                        hintContent: 'Дмитрогорский продукт Зеленоград.',
+                        balloonContentHeader: 'Дмитрогорский продукт Зеленоград.',
+                        balloonContentBody: '<p>Дмитрогорский продукт Зеленоград.</p>'
+                    }, {
+                        preset: 'islands#orangeShoppingIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+
+                var myPlacemark_products_5 = new ymaps.Placemark([56.03441,37.168558], {
+                        hintContent: 'Магнит супермаркет ',
+                        balloonContentHeader: 'Магнит супермаркет ',
+                        balloonContentBody: '<p>Магнит супермаркет продукты деревня Чашниково, Россия, Московская область, Солнечногорский район, Пешковское сельское поселение 9,5 км (14 мин)</p>'
+                    }, {
+                        preset: 'islands#orangeShoppingIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+                
+                var myPlacemark_products_6 = new ymaps.Placemark([56.030095,37.173266], {
+                        hintContent: 'Минимаркет Свежий ',
+                        balloonContentHeader: 'Минимаркет Свежий ',
+                        balloonContentBody: '<p>Минимаркет Свежий деревня Чашниково, 4А, Россия, Московская область, Солнечногорский район, Пешковское сельское поселение 9,5 км (14 мин)</p>'
+                    }, {
+                        preset: 'islands#orangeShoppingIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+
+                var myPlacemark_products_7 = new ymaps.Placemark([56.028443,37.228494], {
+                        hintContent: 'Продуктовый рынок поселок городского типа Менделеево',
+                        balloonContentHeader: 'Продуктовый рынок поселок городского типа Менделеево',
+                        balloonContentBody: '<p>Продуктовый рынок поселок городского типа Менделеево, Россия, Московская область, Солнечногорский район 13 км (17 мин)</p>'
+                    }, {
+                        preset: 'islands#orangeShoppingIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+
+                var myPlacemark_products_8 = new ymaps.Placemark([56.057157,37.192391], {
+                        hintContent: 'Фрегат 2 Продукты садовое товарищество Искровец',
+                        balloonContentHeader: 'Фрегат 2 Продукты садовое товарищество Искровец',
+                        balloonContentBody: '<p>Фрегат 2 Продукты садовое товарищество Искровец, Россия, Московская область, Солнечногорский район, Пешковское сельское поселение 950 м (3 мин)</p>'
+                    }, {
+                        preset: 'islands#orangeShoppingIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+
+
+                myMapAll.geoObjects.add(myPlacemark_products_1);
+                myMapAll.geoObjects.add(myPlacemark_products_2);
+                myMapAll.geoObjects.add(myPlacemark_products_3);
+                myMapAll.geoObjects.add(myPlacemark_products_4);
+                myMapAll.geoObjects.add(myPlacemark_products_5);
+                myMapAll.geoObjects.add(myPlacemark_products_6);
+                myMapAll.geoObjects.add(myPlacemark_products_7);
+                myMapAll.geoObjects.add(myPlacemark_products_8);
+
+                jQuery('.products input').on('change', function(){
+                        if(jQuery(this).prop('checked')){
+                            myMapAll.geoObjects.add(myPlacemark_products_1);
+                            myMapAll.geoObjects.add(myPlacemark_products_2);
+                            myMapAll.geoObjects.add(myPlacemark_products_3);
+                            myMapAll.geoObjects.add(myPlacemark_products_4);
+                            myMapAll.geoObjects.add(myPlacemark_products_5);
+                            myMapAll.geoObjects.add(myPlacemark_products_6);
+                            myMapAll.geoObjects.add(myPlacemark_products_7);
+                            myMapAll.geoObjects.add(myPlacemark_products_8);
+                        }else {
+                            myMapAll.geoObjects.remove(myPlacemark_products_1);
+                            myMapAll.geoObjects.remove(myPlacemark_products_2);
+                            myMapAll.geoObjects.remove(myPlacemark_products_3);
+                            myMapAll.geoObjects.remove(myPlacemark_products_4);
+                            myMapAll.geoObjects.remove(myPlacemark_products_5);
+                            myMapAll.geoObjects.remove(myPlacemark_products_6);
+                            myMapAll.geoObjects.remove(myPlacemark_products_7);
+                            myMapAll.geoObjects.remove(myPlacemark_products_8);
+                        }
+                    });
+                //=================END Продукты========================================
+                //===================Развлекательные центры=========================================
+                var myPlacemark_razvlcenters_1 = new ymaps.Placemark([56.001257,37.226652], {
+                        hintContent: 'ForRestClub',
+                        balloonContentHeader: 'ForRestClub',
+                        balloonContentBody: '<p>ForRestClub 5-й микрорайон, Россия, Москва, Зеленоград 14 км (20 мин)</p>'
+                    }, {
+                        preset: 'islands#yellowTheaterIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+
+                var myPlacemark_razvlcenters_2 = new ymaps.Placemark([56.011892,37.199425], {
+                        hintContent: 'Q-zel ',
+                        balloonContentHeader: 'Q-zel ',
+                        balloonContentBody: '<p>Q-zel Панфиловский проспект, 4с1, Россия, Москва, Зеленоград 10 км (15 мин)</p>'
+                    }, {
+                        preset: 'islands#yellowTheaterIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+
+                var myPlacemark_razvlcenters_3 = new ymaps.Placemark([56.00394,37.229195], {
+                        hintContent: 'Автомобильный кинотеатр Кинодром',
+                        balloonContentHeader: 'Автомобильный кинотеатр Кинодром',
+                        balloonContentBody: '<p>Автомобильный кинотеатр Кинодром 5253-й проезд, 1с3, Россия, Москва, Зеленоград, 5-й микрорайон 14 км (20 мин)</p>'
+                    }, {
+                        preset: 'islands#yellowTheaterIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+
+                var myPlacemark_razvlcenters_4 = new ymaps.Placemark([55.964801,37.164687], {
+                        hintContent: 'Зеленокарт',
+                        balloonContentHeader: 'Зеленокарт',
+                        balloonContentBody: '<p>Зеленокарт 687-й проезд, 15, Россия, Москва, Зеленоград 17 км (25 мин)</p>'
+                    }, {
+                        preset: 'islands#yellowTheaterIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+
+                var myPlacemark_razvlcenters_5 = new ymaps.Placemark([55.982678,37.174811], {
+                        hintContent: 'Иридиум',
+                        balloonContentHeader: 'Иридиум',
+                        balloonContentBody: '<p>Иридиум Крюковская площадь, 1, Россия, Москва, Зеленоградский  административный округ 15 км (22 мин)</p>'
+                    }, {
+                        preset: 'islands#yellowTheaterIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+
+                var myPlacemark_razvlcenters_6 = new ymaps.Placemark([55.997332,37.261653], {
+                        hintContent: 'КидБург ',
+                        balloonContentHeader: 'КидБург ',
+                        balloonContentBody: '<p>КидБург Солнечногорский район, Россия, Московская область 16 км (21 мин)</p>'
+                    }, {
+                        preset: 'islands#yellowTheaterIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+
+                var myPlacemark_razvlcenters_7 = new ymaps.Placemark([55.927064,37.199748], {
+                        hintContent: 'Пейнтбольный клуб Команда-А',
+                        balloonContentHeader: 'Пейнтбольный клуб Команда-А',
+                        balloonContentBody: '<p>Пейнтбольный клуб Команда-А сельское поселение Кутузовское, Россия, Московская область, Солнечногорский район 23 км. (30 мин)</p>'
+                    }, {
+                        preset: 'islands#yellowTheaterIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+
+                var myPlacemark_razvlcenters_8 = new ymaps.Placemark([55.998298,37.257728], {
+                        hintContent: 'ТРЦ Zеленопарк',
+                        balloonContentHeader: 'ТРЦ Zеленопарк',
+                        balloonContentBody: '<p>ТРЦ Zеленопарк Солнечногорский район, Россия, Московская область 17 км (21 мин)</p>'
+                    }, {
+                        preset: 'islands#yellowTheaterIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+
+
+                myMapAll.geoObjects.add(myPlacemark_razvlcenters_1);
+                myMapAll.geoObjects.add(myPlacemark_razvlcenters_2);
+                myMapAll.geoObjects.add(myPlacemark_razvlcenters_3);
+                myMapAll.geoObjects.add(myPlacemark_razvlcenters_4);
+                myMapAll.geoObjects.add(myPlacemark_razvlcenters_5);
+                myMapAll.geoObjects.add(myPlacemark_razvlcenters_6);
+                myMapAll.geoObjects.add(myPlacemark_razvlcenters_7);
+                myMapAll.geoObjects.add(myPlacemark_razvlcenters_8);
+
+                jQuery('.razvlcenters input').on('change', function(){
+                        if(jQuery(this).prop('checked')){
+                            myMapAll.geoObjects.add(myPlacemark_razvlcenters_1);
+                            myMapAll.geoObjects.add(myPlacemark_razvlcenters_2);
+                            myMapAll.geoObjects.add(myPlacemark_razvlcenters_3);
+                            myMapAll.geoObjects.add(myPlacemark_razvlcenters_4);
+                            myMapAll.geoObjects.add(myPlacemark_razvlcenters_5);
+                            myMapAll.geoObjects.add(myPlacemark_razvlcenters_6);
+                            myMapAll.geoObjects.add(myPlacemark_razvlcenters_7);
+                            myMapAll.geoObjects.add(myPlacemark_razvlcenters_8);
+                        }else {
+                            myMapAll.geoObjects.remove(myPlacemark_razvlcenters_1);
+                            myMapAll.geoObjects.remove(myPlacemark_razvlcenters_2);
+                            myMapAll.geoObjects.remove(myPlacemark_razvlcenters_3);
+                            myMapAll.geoObjects.remove(myPlacemark_razvlcenters_4);
+                            myMapAll.geoObjects.remove(myPlacemark_razvlcenters_5);
+                            myMapAll.geoObjects.remove(myPlacemark_razvlcenters_6);
+                            myMapAll.geoObjects.remove(myPlacemark_razvlcenters_7);
+                            myMapAll.geoObjects.remove(myPlacemark_razvlcenters_8);
+                        }
+                    });
+                //=================END Развлекательные центры========================================
+                //===================Спортивные комплексы и фитнес=========================================
+                var myPlacemark_fitnes_1 = new ymaps.Placemark([56.012229,37.195346], {
+                        hintContent: 'Green City ',
+                        balloonContentHeader: 'Green City ',
+                        balloonContentBody: '<p>Green City Отдел продаж , Чаша открытого бассейна, аквапарка; Фитнес спорт клуб 1-й Западный проезд, 12с5, Россия, Москва, Зеленоград 10 км (14 мин)</p>'
+                    }, {
+                        preset: 'islands#darkBlueSportIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+
+                var myPlacemark_fitnes_2 = new ymaps.Placemark([55.986485,37.225134], {
+                        hintContent: 'Зебра, Фитнес-клуб.',
+                        balloonContentHeader: 'Зебра, Фитнес-клуб.',
+                        balloonContentBody: '<p>Зебра бассейн, фитнес-клуб Озёрная аллея, 8, Россия, Москва, Зеленоград 16 км (20 мин)</p>'
+                    }, {
+                        preset: 'islands#darkBlueSportIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+
+                var myPlacemark_fitnes_3 = new ymaps.Placemark([55.98429,37.208992], {
+                        hintContent: 'Спортивный комплекс МИЭТ ',
+                        balloonContentHeader: 'Спортивный комплекс МИЭТ ',
+                        balloonContentBody: '<p>Спортивный комплекс МИЭТ площадь Шокина, 1с5, Россия, Москва, Зеленоградский административный округ 17 км (23 мин)</p>'
+                    }, {
+                        preset: 'islands#darkBlueSportIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+
+                myMapAll.geoObjects.add(myPlacemark_fitnes_1);
+                myMapAll.geoObjects.add(myPlacemark_fitnes_2);
+                myMapAll.geoObjects.add(myPlacemark_fitnes_3);
+
+
+                jQuery('.fitnes input').on('change', function(){
+                        if(jQuery(this).prop('checked')){
+                            myMapAll.geoObjects.add(myPlacemark_fitnes_1);
+                            myMapAll.geoObjects.add(myPlacemark_fitnes_2);
+                            myMapAll.geoObjects.add(myPlacemark_fitnes_3);
+                        }else {
+                            myMapAll.geoObjects.remove(myPlacemark_fitnes_1);
+                            myMapAll.geoObjects.remove(myPlacemark_fitnes_2);
+                            myMapAll.geoObjects.remove(myPlacemark_fitnes_3);
+                        }
+                    });
+                //=================END Спортивные комплексы и фитнес========================================
+                //===================Торговые центры=========================================
+                var myPlacemark_torgcenters_1 = new ymaps.Placemark([56.049282860748,37.155433779975], {
+                        hintContent: '«Сельмаг» торговый центр, супермаркет.',
+                        balloonContentHeader: '«Сельмаг» торговый центр, супермаркет.',
+                        balloonContentBody: '<p>Сельмаг торговый центр, супермаркет Ленинградское шоссе, Россия, Московская область 2,4 км (5 мин)</p>'
+                    }, {
+                        preset: 'islands#darkOrangeShoppingIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+                
+                var myPlacemark_torgcenters_2 = new ymaps.Placemark([56.006684,37.202343], {
+                        hintContent: '1-й Торговый центр ',
+                        balloonContentHeader: '1-й Торговый центр ',
+                        balloonContentBody: '<p>1-й Торговый центр проспект Генерала Алексеева, Россия, Москва, Зеленоград 11 км (17 мин)</p>'
+                    }, {
+                        preset: 'islands#darkOrangeShoppingIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+
+                var myPlacemark_torgcenters_3 = new ymaps.Placemark([56.057865,37.147682], {
+                        hintContent: 'Ламиера торговый центр, молл.',
+                        balloonContentHeader: 'Ламиера торговый центр, молл.',
+                        balloonContentBody: '<p>Ламиера  торговый центр, молл Ленинградское шоссе, Россия, Московская область 2,9 км (6 мин)</p>'
+                    }, {
+                        preset: 'islands#darkOrangeShoppingIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+
+                var myPlacemark_torgcenters_4 = new ymaps.Placemark([55.979118,37.174622], {
+                        hintContent: 'Торговый центр Арбатский',
+                        balloonContentHeader: 'Торговый центр Арбатский',
+                        balloonContentBody: '<p>Торговый центр Арбатский Заводская улица, 1Б, Россия, Москва, Зеленоград 16 км (25 мин)</p>'
+                    }, {
+                        preset: 'islands#darkOrangeShoppingIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+
+                var myPlacemark_torgcenters_5 = new ymaps.Placemark([56.008797,37.200044], {
+                        hintContent: 'Торговый центр Панфиловский',
+                        balloonContentHeader: 'Торговый центр Панфиловский',
+                        balloonContentBody: '<p>Торговый центр Панфиловский Панфиловский проспект, 6А, Россия, Москва, Зеленоград 11 км (16 мин)</p>'
+                    }, {
+                        preset: 'islands#darkOrangeShoppingIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+
+                var myPlacemark_torgcenters_6 = new ymaps.Placemark([55.991324,37.216268], {
+                        hintContent: 'ТЦ Савёлки',
+                        balloonContentHeader: 'ТЦ Савёлки',
+                        balloonContentBody: '<p>ТЦ Савёлки Савёлкинский проезд, 2, Россия, Москва, Зеленоград, 3-й микрорайон 13 км (23 мин)</p>'
+                    }, {
+                        preset: 'islands#darkOrangeShoppingIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+
+
+                myMapAll.geoObjects.add(myPlacemark_torgcenters_1);
+                myMapAll.geoObjects.add(myPlacemark_torgcenters_2);
+                myMapAll.geoObjects.add(myPlacemark_torgcenters_3);
+                myMapAll.geoObjects.add(myPlacemark_torgcenters_4);
+                myMapAll.geoObjects.add(myPlacemark_torgcenters_5);
+                myMapAll.geoObjects.add(myPlacemark_torgcenters_6);
+
+
+                jQuery('.torgcenters input').on('change', function(){
+                        if(jQuery(this).prop('checked')){
+                            myMapAll.geoObjects.add(myPlacemark_torgcenters_1);
+                            myMapAll.geoObjects.add(myPlacemark_torgcenters_2);
+                            myMapAll.geoObjects.add(myPlacemark_torgcenters_3);
+                            myMapAll.geoObjects.add(myPlacemark_torgcenters_4);
+                            myMapAll.geoObjects.add(myPlacemark_torgcenters_5);
+                            myMapAll.geoObjects.add(myPlacemark_torgcenters_6);
+                        }else {
+                            myMapAll.geoObjects.remove(myPlacemark_torgcenters_1);
+                            myMapAll.geoObjects.remove(myPlacemark_torgcenters_2);
+                            myMapAll.geoObjects.remove(myPlacemark_torgcenters_3);
+                            myMapAll.geoObjects.remove(myPlacemark_torgcenters_4);
+                            myMapAll.geoObjects.remove(myPlacemark_torgcenters_5);
+                            myMapAll.geoObjects.remove(myPlacemark_torgcenters_6);
+                        }
+                    });
+                //=================END Торговые центры========================================
+                //===================Школы=========================================
+                var myPlacemark_scools_1 = new ymaps.Placemark([56.091572,37.107717], {
+                        hintContent: '"Колледж "Подмосковье"',
+                        balloonContentHeader: '"Колледж "Подмосковье"',
+                        balloonContentBody: '<p>Государственное бюджетное профессиональное образовательное учреждение колледж Московской области "Колледж "Подмосковье" деревня Ложки, Россия, Московская область, Солнечногорский район 8 км (13 мин)</p>'
+                    }, {
+                        preset: 'islands#brownFamilyIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+                
+                var myPlacemark_scools_2 = new ymaps.Placemark([56.067761,37.124618], {
+                        hintContent: 'Берсеневская Общеобразовательная школа-интернат для Детей С Ограниченными Возможностями Здоровья',
+                        balloonContentHeader: 'Берсеневская Общеобразовательная школа-интернат для Детей С Ограниченными Возможностями Здоровья',
+                        balloonContentBody: '<p>Берсеневская Общеобразовательная школа-интернат для Детей С Ограниченными Возможностями Здоровья деревня Берсеневка, Россия, Московская область, Солнечногорский район 6 км (11 мин)</p>'
+                    }, {
+                        preset: 'islands#brownFamilyIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+
+                var myPlacemark_scools_3 = new ymaps.Placemark([55.993223,37.192669], {
+                        hintContent: 'ГБОУ Школа № 718',
+                        balloonContentHeader: 'ГБОУ Школа № 718',
+                        balloonContentBody: '<p>ГБОУ Школа № 718 Зеленоград, к1214, Россия, Москва 14 км (22 мин)</p>'
+                    }, {
+                        preset: 'islands#brownFamilyIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+
+                var myPlacemark_scools_4 = new ymaps.Placemark([55.996027,37.211525], {
+                        hintContent: 'Детская художественная школа № 9',
+                        balloonContentHeader: 'Детская художественная школа № 9',
+                        balloonContentBody: '<p>Детская художественная школа № 9 Центральный проспект, 435, Россия, Москва, Зеленоград 12 км (20 мин)</p>'
+                    }, {
+                        preset: 'islands#brownFamilyIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+
+                var myPlacemark_scools_5 = new ymaps.Placemark([56.095649,37.114041], {
+                        hintContent: 'Ложковская Средняя Общеобразовательная школа',
+                        balloonContentHeader: 'Ложковская Средняя Общеобразовательная школа',
+                        balloonContentBody: '<p>Ложковская Средняя Общеобразовательная школа Ленинградское шоссе, 49-й километр, Россия,Московская область, Ленинградское шоссе 7,8 км (12 мин)</p>'
+                    }, {
+                        preset: 'islands#brownFamilyIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+
+                var myPlacemark_scools_6 = new ymaps.Placemark([56.0317,37.171314], {
+                        hintContent: 'МБОУ Чашниковская СОШ ',
+                        balloonContentHeader: 'МБОУ Чашниковская СОШ ',
+                        balloonContentBody: '<p>Чашниковская Средняя Общеобразовательная школа деревня Чашниково, Россия, Московская область, Солнечногорский район, Пешковское сельское поселение 10 км (15 мин)</p>'
+                    }, {
+                        preset: 'islands#brownFamilyIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+
+                var myPlacemark_scools_7 = new ymaps.Placemark([56.038358,37.232438], {
+                        hintContent: 'Менделеевская Средняя Общеобразовательная школа',
+                        balloonContentHeader: 'Менделеевская Средняя Общеобразовательная школа',
+                        balloonContentBody: '<p>Менделеевская Средняя Общеобразовательная школа улица Куйбышева, 7, Россия, Московская область, Солнечногорский район, поселок городского типа Менделеево 14 км (18 мин</p>'
+                    }, {
+                        preset: 'islands#brownFamilyIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+
+                var myPlacemark_scools_8 = new ymaps.Placemark([56.039419,37.235088], {
+                        hintContent: 'Начальная школа - детский сад пос. Менделеево',
+                        balloonContentHeader: 'Начальная школа - детский сад пос. Менделеево',
+                        balloonContentBody: '<p>Начальная школа - детский сад пос. Менделеево улица Куйбышева, 13, Россия, Московская область, Солнечногорский район, поселок городского типа Менделеево 14 км (18 мин)</p>'
+                    }, {
+                        preset: 'islands#brownFamilyIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+
+                var myPlacemark_scools_9 = new ymaps.Placemark([56.079342,37.07013], {
+                        hintContent: 'Общеобразовательная школа',
+                        balloonContentHeader: 'Общеобразовательная школа',
+                        balloonContentBody: '<p>Общеобразовательная школа Школьная улица, 1, Россия, Московская область, Солнечногорский район, посёлок городского типа Поварово 11 км (19 мин)</p>'
+                    }, {
+                        preset: 'islands#brownFamilyIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+
+                var myPlacemark_scools_10 = new ymaps.Placemark([56.074685,37.12441], {
+                        hintContent: 'Радумльский Лицей-интернат',
+                        balloonContentHeader: 'Радумльский Лицей-интернат',
+                        balloonContentBody: '<p>Радумльский Лицей-интернат деревня Радумля, Россия, Московская область,Солнечногорский район 4,6 км  (8 мин)</p>'
+                    }, {
+                        preset: 'islands#brownFamilyIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+
+                var myPlacemark_scools_11 = new ymaps.Placemark([55.987593,37.222538], {
+                        hintContent: 'Спортивная школа олимпийского резерва № 111',
+                        balloonContentHeader: 'Спортивная школа олимпийского резерва № 111',
+                        balloonContentBody: '<p>Спортивная школа олимпийского резерва № 111 Озёрная аллея, 10, Россия, Москва, Зеленоград 15 км (21 мин)</p>'
+                    }, {
+                        preset: 'islands#brownFamilyIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+
+                var myPlacemark_scools_12 = new ymaps.Placemark([56.002672,37.200592], {
+                        hintContent: 'Средняя общеобразовательная школа № 618',
+                        balloonContentHeader: 'Средняя общеобразовательная школа № 618',
+                        balloonContentBody: '<p>Средняя общеобразовательная школа № 618 Зеленоград, к222А, Россия, Москва 12 км (18 мин)</p>'
+                    }, {
+                        preset: 'islands#brownFamilyIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+
+                var myPlacemark_scools_13 = new ymaps.Placemark([56.06625,37.066547], {
+                        hintContent: 'Средняя Общеобразовательная школа Имени 8 Марта ',
+                        balloonContentHeader: 'Средняя Общеобразовательная школа Имени 8 Марта ',
+                        balloonContentBody: '<p>Средняя Общеобразовательная школа Имени 8 Марта  посёлок городского типа Поварово, Россия, Московская область, Солнечногорский район 13 км (20 мин)</p>'
+                    }, {
+                        preset: 'islands#brownFamilyIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+
+                var myPlacemark_scools_14 = new ymaps.Placemark([55.993051,37.206773], {
+                        hintContent: 'ФОК Юность',
+                        balloonContentHeader: 'ФОК Юность',
+                        balloonContentBody: '<p>ГБУ Московское Городское Физкультурно-Спортивное Объединение Москомспорта ФОК Юность СШОР Тяжелая атлетика, фехтование, бокс Зеленоград, к443, Россия, Москва 13 км (22 мин)</p>'
+                    }, {
+                        preset: 'islands#brownFamilyIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+
+                var myPlacemark_scools_15 = new ymaps.Placemark([55.975531,37.153323], {
+                        hintContent: 'Школа № 1150 имени Героя Советского Союза К. К. Рокоссовского',
+                        balloonContentHeader: 'Школа № 1150 имени Героя Советского Союза К. К. Рокоссовского',
+                        balloonContentBody: '<p>Школа № 1150 имени Героя Советского Союза К. К. Рокоссовского Структурное подразделение Зеленоград, к1609, Россия, Москва 16 км (24 мин)</p>'
+                    }, {
+                        preset: 'islands#brownFamilyIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+
+                var myPlacemark_scools_16 = new ymaps.Placemark([56.178493,36.998382], {
+                        hintContent: 'Школа № 4 г. Солнечногорск ',
+                        balloonContentHeader: 'Школа № 4 г. Солнечногорск ',
+                        balloonContentBody: '<p>Школа № 4 г. Солнечногорск микрорайон Рекинцо, 30, Россия, Московская область, Солнечногорск 19 км (22 мин)</p>'
+                    }, {
+                        preset: 'islands#brownFamilyIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+
+                var myPlacemark_scools_17 = new ymaps.Placemark([55.981414,37.162737], {
+                        hintContent: 'Школа айкидо Дзенсин',
+                        balloonContentHeader: 'Школа айкидо Дзенсин',
+                        balloonContentBody: '<p>Школа айкидо Дзенсин Зеленоград, к1812, Россия, Москва 16 км (26 мин)</p>'
+                    }, {
+                        preset: 'islands#brownFamilyIcon',
+                        hasBalloon: true,
+                        hasHint: true,
+                        draggable: false
+                    }
+                );
+
+                var myPlacemark_scools_18 = new ymaps.Placemark([56.069829,37.138915], {
+                            hintContent: 'Школа деревня Радумля',
+                            balloonContentHeader: 'Школа деревня Радумля',
+                            balloonContentBody: '<p>Школа деревня Радумля, Россия, Московская область, Солнечногорский район 4,6 км (8 мин)</p>'
+                        }, {
+                            preset: 'islands#brownFamilyIcon',
+                            hasBalloon: true,
+                            hasHint: true,
+                            draggable: false
+                        }
+                    );
+
+                myMapAll.geoObjects.add(myPlacemark_scools_1);
+                myMapAll.geoObjects.add(myPlacemark_scools_2);
+                myMapAll.geoObjects.add(myPlacemark_scools_3);
+                myMapAll.geoObjects.add(myPlacemark_scools_4);
+                myMapAll.geoObjects.add(myPlacemark_scools_5);
+                myMapAll.geoObjects.add(myPlacemark_scools_6);
+                myMapAll.geoObjects.add(myPlacemark_scools_7);
+                myMapAll.geoObjects.add(myPlacemark_scools_8);
+                myMapAll.geoObjects.add(myPlacemark_scools_9);
+                myMapAll.geoObjects.add(myPlacemark_scools_10);
+                myMapAll.geoObjects.add(myPlacemark_scools_11);
+                myMapAll.geoObjects.add(myPlacemark_scools_12);
+                myMapAll.geoObjects.add(myPlacemark_scools_13);
+                myMapAll.geoObjects.add(myPlacemark_scools_14);
+                myMapAll.geoObjects.add(myPlacemark_scools_15);
+                myMapAll.geoObjects.add(myPlacemark_scools_16);
+                myMapAll.geoObjects.add(myPlacemark_scools_17);
+                myMapAll.geoObjects.add(myPlacemark_scools_18);
+
+                jQuery('.scools input').on('change', function(){
+                        if(jQuery(this).prop('checked')){
+                            myMapAll.geoObjects.add(myPlacemark_scools_1);
+                            myMapAll.geoObjects.add(myPlacemark_scools_2);
+                            myMapAll.geoObjects.add(myPlacemark_scools_3);
+                            myMapAll.geoObjects.add(myPlacemark_scools_4);
+                            myMapAll.geoObjects.add(myPlacemark_scools_5);
+                            myMapAll.geoObjects.add(myPlacemark_scools_6);
+                            myMapAll.geoObjects.add(myPlacemark_scools_7);
+                            myMapAll.geoObjects.add(myPlacemark_scools_8);
+                            myMapAll.geoObjects.add(myPlacemark_scools_9);
+                            myMapAll.geoObjects.add(myPlacemark_scools_10);
+                            myMapAll.geoObjects.add(myPlacemark_scools_11);
+                            myMapAll.geoObjects.add(myPlacemark_scools_12);
+                            myMapAll.geoObjects.add(myPlacemark_scools_13);
+                            myMapAll.geoObjects.add(myPlacemark_scools_14);
+                            myMapAll.geoObjects.add(myPlacemark_scools_15);
+                            myMapAll.geoObjects.add(myPlacemark_scools_16);
+                            myMapAll.geoObjects.add(myPlacemark_scools_17);
+                            myMapAll.geoObjects.add(myPlacemark_scools_18);
+                        }else {
+                            myMapAll.geoObjects.remove(myPlacemark_scools_1);
+                            myMapAll.geoObjects.remove(myPlacemark_scools_2);
+                            myMapAll.geoObjects.remove(myPlacemark_scools_3);
+                            myMapAll.geoObjects.remove(myPlacemark_scools_4);
+                            myMapAll.geoObjects.remove(myPlacemark_scools_5);
+                            myMapAll.geoObjects.remove(myPlacemark_scools_6);
+                            myMapAll.geoObjects.remove(myPlacemark_scools_7);
+                            myMapAll.geoObjects.remove(myPlacemark_scools_8);
+                            myMapAll.geoObjects.remove(myPlacemark_scools_9);
+                            myMapAll.geoObjects.remove(myPlacemark_scools_10);
+                            myMapAll.geoObjects.remove(myPlacemark_scools_11);
+                            myMapAll.geoObjects.remove(myPlacemark_scools_12);
+                            myMapAll.geoObjects.remove(myPlacemark_scools_13);
+                            myMapAll.geoObjects.remove(myPlacemark_scools_14);
+                            myMapAll.geoObjects.remove(myPlacemark_scools_15);
+                            myMapAll.geoObjects.remove(myPlacemark_scools_16);
+                            myMapAll.geoObjects.remove(myPlacemark_scools_17);
+                            myMapAll.geoObjects.remove(myPlacemark_scools_18);
+                        }
+                    });
+                //=================END Школы========================================
+
+                //===================Главная Метка=========================================
+                var myPlacemark_main = new ymaps.Placemark([56.060066,37.178768],{
+                        balloonContentHeader: "",
+                        balloonContentBody: '',
+                        balloonContentFooter: "",
+                        hintContent: ""
+                    },
+                    {   
+                        iconLayout: 'default#image',
+                        iconImageHref: 'https://www.3220044.ru/bitrix/templates/gwdd2/images/village_placemark.png',
+                        iconImageSize: [66, 79],
+                        iconImageOffset: [-33, -79]
+                    });
+
+                    myMapAll.geoObjects.add(myPlacemark_main);
+                    
+                //=================END Главная Метка==============================================
+                
+        }
+        //==============END Все Маркеры=================
+    </script>
+</body>
+</html>
